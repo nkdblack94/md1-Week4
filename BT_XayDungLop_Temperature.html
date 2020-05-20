@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Temperature() {
+        this.c = 0;
+
+        this.getC = function () {
+            return this.c
+        };
+        this.setC = function (c) {
+            if (c < -273){
+                return this.c = -273
+            } else {
+                return this.c = c;
+            }
+
+        };
+
+        this.getF = function () {
+            return this.c * 1.8 + 32
+        };
+        this.getKenvin = function () {
+            return this.c + 273.15
+        };
+    };
+
+    let c = new Temperature();
+</script>
+</body>
+</html>
