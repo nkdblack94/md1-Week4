@@ -31,6 +31,12 @@
             return this.year = year
         };
 
+        this.setDate = function (day, month, year) {
+             this.day = day;
+             this.month = month;
+             this.year = year;
+        };
+
         this.toString = function () {
            return this.day + '/' + this.month + '/' + this.year;
         };
