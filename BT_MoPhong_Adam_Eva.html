@@ -22,8 +22,6 @@
         this.decreaseWeight = function () {
             if (this.weight > 0){
                 this.weight--;
-            } else {
-                alert('Ăn lằm ăn lốn');
             }
         }
     };
@@ -46,6 +44,8 @@
             if (apple.weight > 0){
                 this.weight++;
                 apple.decreaseWeight();
+            } else {
+                console.log('Ăn lằm ăn lốn')
             }
         };
         this.checkApple = function (apple) {

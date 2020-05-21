@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Mobile = function (name, pin, senMessage, saveMessageD, saveMessageG) {
+        this.name = name;
+        this.pin = pin;
+        this.senMessage = senMessage;
+        this.saveMessageD = saveMessageD;
+        this.saveMessageG = saveMessageG;
+        this.message = [];
+        this.status = false;
+
+
+        this.getName = function () {
+            return this.name
+        };
+        this.getPin = function () {
+            return this.pin;
+        };
+        this.getMessage = function () {
+            return this.message;
+        };
+        this.getSaveMessageD = function () {
+            return this.saveMessageD;
+        };
+        this.getSaveMessageG = function () {
+            return this.saveMessageG;
+        };
+
+        this.setStatus = function () {
+            if (this.status === true){
+                this.status = false;
+            } else {
+                this.status = true
+            }
+        };
+        this.setPin = function (pin) {
+            if (pin > 100){
+                this.pin = 100
+            } else {
+                return this.pin = pin;
+            }
+        };
+        this.setMessage = function (text) {
+            if (this.status === true){
+                return this.message = text;
+            } else {
+                this.message = "Bạn cần mở máy";
+            }
+        };
+    };
+
+    let nokia = new Mobile('Tung', 10);
+    let inphon = new Mobile('Hai', 10);
+</script>
+</body>
+</html>
