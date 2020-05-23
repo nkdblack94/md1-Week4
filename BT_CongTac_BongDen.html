@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let SwitchButton = function (status) {
+        this.status = status;
+
+        this.getStatus = function () {
+            return this.status;
+        };
+        this.switchOn = function () {
+           return this.status = true;
+        };
+        this.switchOff = function () {
+           return this.status = false
+        };
+    };
+
+    let ElectricLamp = function (switchButton) {
+
+        this.connectToButton = function () {
+            if (switchButton.getStatus()){
+                alert('đèn sáng')
+            } else {
+                alert('đèn tắt')
+            }
+        }
+    };
+
+    let button = new SwitchButton();
+    let lamp = new ElectricLamp(button);
+</script>
+</body>
+</html>
