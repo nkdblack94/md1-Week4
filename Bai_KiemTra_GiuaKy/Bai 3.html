@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bai 3: Tính Tuổi của 1 người dựa vào năm sinh</h1>
+<samp>Nhập năm sinh của bạn</samp>
+<input type="text" id="input"/>
+<button type="button" onclick="count(input.value)">Click</button>
+<div id="txt"></div>
+<script>
+    function count(number) {
+        let result = '';
+        let n = parseInt(number);
+        if (!isNaN(n)){
+            result = 'Tuổi của bạn là: ' + (2020 - n);
+        } else {
+            result = 'Năm sinh ko đúng'
+        }
+        document.getElementById('txt').innerHTML = result
+    }
+</script>
+</body>
+</html>
