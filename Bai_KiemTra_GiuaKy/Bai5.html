@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Bài 5: Tính tổng đường chéo chính của ma trận vuông</h1>
+<div id="txt"></div>
+<script>
+    function count(array) {
+        let result = 0;
+        for (let i = 0; i < array.length; i++){
+            for (let j = 0; j < array.length; j++){
+                if (i === j){
+                    result += array[i][j];
+                }
+            }
+        }
+        document.getElementById('txt').innerHTML = 'Tổng đường chéo của ma trận vuông là: ' + result;
+    }
+
+    let array = [
+        [8, 3, 13, 21],
+        [15, 12, 20, 18],
+        [0, 9, 6, 3],
+        [40, 24, 1, 4]
+    ];
+    count(array);
+</script>
+</body>
+</html>
