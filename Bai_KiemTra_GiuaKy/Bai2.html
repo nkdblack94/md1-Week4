@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function countTotal(array) {
+        let result = 0;
+        for (let i = 0; i < array.length; i++){
+            if (array[i] % 2 !== 0){
+                result += array[i]
+            }
+        }
+        document.write('Tổng các số lẻ trong mảng: ' + array + ' là: ' + result);
+    }
+
+    let arr = [1, 4, 5, 15, 20, 9, 35, 11, 13];
+    countTotal(arr);
+</script>
+</body>
+</html>
