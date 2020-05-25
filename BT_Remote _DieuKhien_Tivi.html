@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Remote = function (television, pin) {
+        this.pin = pin;
+
+        this.getPin = function () {
+            return this.pin;
+        };
+        this.setPin = function (pin) {
+            this.pin = pin;
+        }
+        this.turnOn = function () {
+            if (this.pin > 0) {
+                television.status = true;
+                this.pin--;
+            } else {
+                alert('Điều khiển hết pin')
+            }
+        };
+        this.turnOff = function () {
+            if (this.pin > 0) {
+                television.status = false;
+                this.pin--;
+            } else {
+                alert('Điều khiển hết pin')
+            }
+        };
+        this.volumeUp = function () {
+            if (television.getStatus()){
+                television.volume += 2;
+            } else {
+                alert('tivi chưa mở');
+            }
+
+        };
+
+        this.control = function (channels) {
+            if (this.pin > 0) {
+                if (television.getStatus()) {
+                    let check = false;
+                    for (let i = 0; i < television.menu.length; i++) {
+                        if (channels === television.menu[i]) {
+                            alert('kênh vừa chuyển ' + television.menu[i]);
+                            television.goingOn = channels;
+                            check = true;
+                            this.pin--;
+                            break;
+                        }
+                    }
+                    if (check === false) {
+                        alert('Kênh chưa đăng ký');
+                    }
+                } else {
+                    alert('tivi chưa mở');
+                }
+            } else {
+                alert('điều khiển hết pin');
+            }
+        }
+    };
+
+    let Television = function (goingOn, volume, status) {
+        this.goingOn = goingOn;
+        this.volume = volume;
+        this.status = status;
+        this.menu = ['VTV 1', 'VTV 2', 'VTV 3', 'VTV 4', 'VTV 5', 'VTV 6', 'VTV 7', 'HBO', 'AXN'];
+
+        this.getStatus = function () {
+            return this.status;
+        };
+        this.getVolume = function () {
+            return this.volume;
+        };
+        this.getGoingOn = function () {
+            if (this.status === true) {
+                alert('Kênh đang phát ' + this.goingOn)
+            } else {
+                alert('tivi đang tắt')
+            }
+        }
+    };
+
+    let tivi = new Television('VTV 7', 30, false);
+    let dk = new Remote(tivi, 100);
+</script>
+</body>
+</html>
