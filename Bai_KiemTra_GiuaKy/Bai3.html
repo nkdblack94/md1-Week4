@@ -12,14 +12,15 @@
 <div id="txt"></div>
 <script>
     function count(number) {
+        let year = new Date().getFullYear();
         let result = '';
         let n = parseInt(number);
-        if (!isNaN(n)){
-            result = 'Tuổi của bạn là: ' + (2020 - n);
+        if (n < year){
+            result = year - n;
         } else {
-            result = 'Năm sinh ko đúng'
+            result = 'năm sinh sai xin nhập lại';
         }
-        document.getElementById('txt').innerHTML = result
+        document.getElementById('txt').innerHTML = result;
     }
 </script>
 </body>
