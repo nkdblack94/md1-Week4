@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let Rat = function (name, mass, speed){
+        this.name = name;
+        this.mass = mass;
+        this.speed = speed;
+        this.status = true;
+
+        this.getStatus = function () {
+            return this.status;
+        };
+        this.died = function () {
+            this.status = false;
+        };
+        this.getSpeed = function () {
+            return this.speed;
+        };
+        this.setSpeed = function (speed) {
+           return this.speed = speed;
+        };
+        this.sound = function () {
+            alert('Chít Chít')
+        }
+    };
+
+    let Cat = function (name, mass, speed) {
+        this.name = name;
+        this.mass = mass;
+        this.speed = speed;
+
+        this.getSpeed = function () {
+            return this.speed;
+        };
+        this.setSpeed = function (speed) {
+            return this.speed = speed;
+        };
+        this.sound = function () {
+            alert('Meo Meo')
+        };
+        this.arrest = function (rat) {
+            if (this.speed > rat.getSpeed()){
+                alert('mèo bắt được chuột')
+                this.eatMeat(rat);
+            } else {
+                alert('Chuột chạy thoát')
+            }
+        };
+        this.eatMeat = function (rat) {
+            if (rat.getStatus()){
+                alert('mèo ăn chuột');
+                rat.died();
+                this.mass += rat.mass;
+                rat.speed = 0;
+                rat.mass = 0;
+            } else {
+                alert('chết ko ăn được');
+            }
+        }
+    };
+
+
+    let cat = new Cat('mèo', 30, 30);
+    let rat = new Rat('chuột', 10, 20);
+    console.log(rat);
+    console.log(cat);
+    console.log(cat.arrest(rat));
+    console.log(rat);
+</script>
+</body>
+</html>
