@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div align="center">
+    <canvas id="myCanvas" width="400px" height="600px" style="border:1px solid chocolate"></canvas>
+</div>
+<script>
+    let Object = function (x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.status = 'down';
+        this.image = '';
+
+        this.setY = function (number) {
+            this.y += number;
+        };
+
+        this.setStyle = function (style) {
+            this.x = style.x;
+            this.y = style.y;
+            this.width = style.width;
+            this.height = style.height;
+            this.image = style.image;
+            this.status = style.status;
+        };
+    };
+
+    const IMG = new Image();
+    IMG.src = './image/road3.jpg';
+
+    let styleBg = {
+        x: 0,
+        y: -590,
+        width: 400,
+        height: 600,
+        image: IMG,
+        status: 'down'
+    };
+
+    let img = new Object(0, 0, 400, 600, 'down');
+    let arrImg = [];
+    img.setStyle(styleBg);
+    arrImg.push({...img, y: 0}, {...img, y: -600});
+
+    const IMG1 = new Image();
+    IMG1.src = './image/Stone-03.png';
+
+
+    let styleRock = {
+        x: 50,
+        y: -150,
+        width: 80,
+        height: 50,
+        image: IMG1,
+        status: 'down'
+    };
+
+    let img1 = new Object(100, 100, 60, 40, 'down');
+    let arrImg1 = [];
+    img1.setStyle(styleRock);
+    arrImg1.push({...img1, x: 300, y: -100}, {...img1, x: 70, y: -350}, {...img1, x: 250, y: -700});
+
+    const IMG2 = new Image();
+    IMG2.src = './image/xu.jpg';
+
+    let styleXu = {
+        x: 50,
+        y: -150,
+        width: 25,
+        height: 25,
+        image: IMG2,
+        status: 'down'
+    };
+
+    let img2 = new Object(100, 100, 10, 10, 'down');
+    let arrImg2 = [];
+    img2.setStyle(styleXu);
+    arrImg2.push({...img2, x: 70, y: -100}, {...img2, x: 200, y: -200}, {...img2, x: 350, y: -500});
+
+    let imgCar = new Image();
+    imgCar.src = './image/oto.png';
+    let car = new Object(180, 480, 40, 100);
+
+    let timer = '';
+    let point = 0;
+    let canvas = document.getElementById('myCanvas');
+    let ctx = canvas.getContext('2d');
+
+    function LoadImg() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let c = Math.trunc(Math.random() * 300 + 10);
+        let x = Math.floor(Math.random() * 350);
+        styleRock.x = x;
+        styleXu.x = c;
+
+        let length = arrImg.length;
+        for (let i = 0; i < length; i++) {
+            if (arrImg[i].y >= 600) {
+                arrImg.splice(i, 1);
+                arrImg.push({...img})
+            }
+            if (arrImg[i].status === 'down') {
+                arrImg[i].setY(+3);
+                ctx.drawImage(arrImg[i].image, arrImg[i].x, arrImg[i].y, arrImg[i].width, arrImg[i].height);
+
+            }
+        }
+
+        let length1 = arrImg1.length;
+        for (let i = 0; i < length1; i++) {
+            if (arrImg1[i].y >= 600) {
+                arrImg1.splice(i, 1);
+                img1.setStyle(styleRock);
+                arrImg1.push({...img1})
+                point++;
+            }
+            if (arrImg1[i].status === 'down') {
+                arrImg1[i].setY(+3);
+                ctx.drawImage(arrImg1[i].image, arrImg1[i].x, arrImg1[i].y, arrImg1[i].width, arrImg1[i].height);
+            }
+        }
+
+        let length2 = arrImg2.length;
+        for (let i = 0; i < length2; i++) {
+            if (arrImg2[i].y >= 600) {
+                arrImg2.splice(i, 1);
+                img2.setStyle(styleXu);
+                arrImg2.push({...img2})
+            }
+            if (arrImg2[i].status === 'down') {
+                arrImg2[i].setY(+3);
+                ctx.drawImage(arrImg2[i].image, arrImg2[i].x, arrImg2[i].y, arrImg2[i].width, arrImg2[i].height);
+            }
+
+        }
+        let gradient = ctx.createLinearGradient(0, 0, 50, 0);
+        ctx.drawImage(imgCar, car.x, car.y, car.width, car.height);
+        gradient.addColorStop("0", "magenta");
+        gradient.addColorStop("0.5", "blue");
+        gradient.addColorStop("1.0", "red");
+        ctx.fillStyle = gradient;
+        ctx.font = "30px Arial";
+        ctx.fillText("Point: " + point,10,50);
+
+        timer = setTimeout(LoadImg, 10)
+
+    }
+
+    StartGame(250);
+
+    document.addEventListener('keydown', function (evt) {
+        if (evt.keyCode === 37) {
+            car.x -= 15
+            if (car.x <= 0){
+                car.x = 0
+            }
+        }
+        if (evt.keyCode === 39) {
+            car.x += 15
+            if (car.x >= 360){
+                car.x = 360
+            }
+        }
+        if (evt.keyCode === 38) {
+            car.y -= 15
+            if (car.y <= 0){
+                car.y = 0
+            }
+        }
+        if (evt.keyCode === 40) {
+            car.y += 15
+            if (car.y >= 500){
+                car.y = 500
+            }
+        }
+    });
+
+    function StartGame(y) {
+        const rect = {x: 147, y: y, width: 110, height: 60};
+        // arrStone = [];
+        // arrStone.push({...stone});
+        let onStart = (evt) => {
+            if (evt.layerX > rect.x && evt.layerX < rect.x + rect.width && evt.layerY < rect.y + rect.height && evt.layerY > rect.y) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                point = 0;
+                LoadImg();
+                canvas.removeEventListener("click", onStart)
+            }
+            console.log(evt)
+        };
+
+        canvas.addEventListener('click', onStart)
+        ctx.beginPath();
+        ctx.rect(rect.x, rect.y, rect.width, rect.height);
+        ctx.fillStyle = 'rgba(225,225,225,0.5)';
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'red';
+        ctx.stroke();
+        ctx.closePath();
+        ctx.font = '40pt Kremlin Pro Web';
+        ctx.fillStyle = 'red';
+        ctx.fillText('Start', 150, 300);
+    }
+
+
+</script>
+</body>
+</html>
