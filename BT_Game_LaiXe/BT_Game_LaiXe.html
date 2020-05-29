@@ -9,6 +9,13 @@
     <canvas id="myCanvas" width="400px" height="600px" style="border:1px solid chocolate"></canvas>
 </div>
 <script>
+    const BOARD_WITH = 400;
+    const BOARD_HEIGHT = 600;
+
+    const CAR_WIDTH = 45;
+    const CAR_HEIGHT = 100;
+
+
     let Object = function (x, y, width, height) {
         this.x = x;
         this.y = y;
@@ -19,6 +26,11 @@
 
         this.setY = function (number) {
             this.y += number;
+        };
+
+        this.reset = function (x, y) {
+            this.x = x;
+            this.y = y;
         };
 
         this.setStyle = function (style) {
@@ -43,10 +55,10 @@
         status: 'down'
     };
 
-    let img = new Object(0, 0, 400, 600, 'down');
+    let img = new Object(0, 0, BOARD_WITH, BOARD_HEIGHT, 'down');
     let arrImg = [];
     img.setStyle(styleBg);
-    arrImg.push({...img, y: 0}, {...img, y: -600});
+    arrImg.push({...img, y: 0}, {...img, y: -BOARD_HEIGHT});
 
     const IMG_CAR = new Image();
     IMG_CAR.src = './image/car.png';
@@ -62,14 +74,14 @@
     IMG_CAR5.src = './image/car01.png';
 
 
-    let setStyleCar = Object.setStyle = function (number,x) {
+    let setStyleCar = Object.setStyle = function (number, x) {
         switch (number) {
             case 0:
                 return {
                     x,
                     y: -50,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR,
                     status: 'down'
                 };
@@ -77,8 +89,8 @@
                 return {
                     x,
                     y: -150,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR1,
                     status: 'down'
                 };
@@ -86,8 +98,8 @@
                 return {
                     x,
                     y: -250,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR2,
                     status: 'down'
                 };
@@ -95,8 +107,8 @@
                 return {
                     x,
                     y: -350,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR3,
                     status: 'down'
                 };
@@ -104,8 +116,8 @@
                 return {
                     x,
                     y: -450,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR4,
                     status: 'down'
                 };
@@ -113,8 +125,8 @@
                 return {
                     x,
                     y: -550,
-                    width: 45,
-                    height: 100,
+                    width: CAR_WIDTH,
+                    height: CAR_HEIGHT,
                     image: IMG_CAR5,
                     status: 'down'
                 }
@@ -225,6 +237,30 @@
         speed += 0.0002;
 
         timer = setTimeout(LoadImg, 10);
+        console.log('aaa');
+
+        for (let i = 0; i < length1; i++) {
+            if (arrImg1[i].x < car.x + car.width &&
+                arrImg1[i].x + arrImg1[i].width > car.x &&
+                arrImg1[i].y < car.y + car.height &&
+                arrImg1[i].y + arrImg1[i].height > car.y){
+                clearTimeout(timer);
+                car.reset(180, 480);
+                img1.reset(img1.x, img1.y)
+                StartGame(250);
+                ctx.fillText("Game Over", 90, 220);
+                break;
+            }
+        }
+        for (let i = 0; i < length2; i++){
+            if (arrImg2[i].x < car.x + car.width &&
+                arrImg2[i].x + arrImg2[i].width > car.x &&
+                arrImg2[i].y < car.y + car.height &&
+                arrImg2[i].y + arrImg2[i].height > car.y){
+                arrImg2.splice(i, 1);
+                point++;
+            }
+        }
     }
 
     StartGame(250);
