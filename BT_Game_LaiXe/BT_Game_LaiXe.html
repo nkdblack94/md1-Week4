@@ -160,14 +160,16 @@
     imgCar.src = './image/car7.png';
     let car = new Object(180, 480, 47, 105);
 
+    let imgBackgroud = new Image();
+    imgBackgroud.src = './image/backgroud.jpg';
+
     let timer = '';
     let point = 0;
     let speed = 1;
     let canvas = document.getElementById('myCanvas');
     let ctx = canvas.getContext('2d');
-
     function LoadImg() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         let c = Math.trunc(Math.random() * 350);
         let t = Math.floor(Math.random() * 2 - 600);
         styleXu.x = c;
@@ -246,9 +248,9 @@
                 arrImg1[i].y + arrImg1[i].height > car.y){
                 clearTimeout(timer);
                 car.reset(180, 480);
-                img1.reset(img1.x, img1.y)
+                arrImg1[i].reset(250, -550);
                 StartGame(250);
-                ctx.fillText("Game Over", 90, 220);
+                ctx.fillText("Game Over", 70, 220);
                 break;
             }
         }
@@ -264,6 +266,8 @@
     }
 
     StartGame(250);
+
+
 
     document.addEventListener('keydown', function (evt) {
         if (evt.keyCode === 37) {
@@ -298,12 +302,17 @@
             if (evt.layerX > rect.x && evt.layerX < rect.x + rect.width && evt.layerY < rect.y + rect.height && evt.layerY > rect.y) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 point = 0;
+                let audioE = document.createElement("audio");
+                audioE.setAttribute("src", "./image/music.mp3");
+                audioE.load();
+                audioE.play();
                 LoadImg();
                 canvas.removeEventListener("click", onStart)
             }
         };
 
         canvas.addEventListener('click', onStart);
+        ctx.drawImage(imgBackgroud, 0, 0, 400, 600);
         ctx.beginPath();
         ctx.rect(rect.x, rect.y, rect.width, rect.height);
         ctx.fillStyle = 'rgba(225,225,225,0.5)';
