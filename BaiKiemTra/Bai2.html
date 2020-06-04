@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function tryRemoveArray(arr, x) {
+        for (let i = 0; i < arr.length; i++){
+            if (x === arr[i]){
+                arr.splice(i, 1)
+            }
+        }
+        document.write(arr);
+    }
+
+    let x = parseInt(prompt('nhap so can tim'));
+    let array = [1, 15, 7, 11, 0, 6];
+    tryRemoveArray(array, x)
+
+</script>
+</body>
+</html>

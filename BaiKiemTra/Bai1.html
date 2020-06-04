@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function findMax(arr) {
+        let max = arr[0];
+        for (let i = 0; i < arr.length; i++){
+            if (arr[i] > max){
+                max = arr[i]
+            }
+        }
+        document.write(max);
+    }
+    let array = [1, 15, 7, 11, 0, 6];
+    findMax(array)
+</script>
+</body>
+</html>
